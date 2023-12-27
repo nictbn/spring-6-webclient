@@ -2,6 +2,7 @@ package com.example.spring6webclient.client;
 
 import com.example.spring6webclient.model.BeerDto;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -14,4 +15,6 @@ public interface BeerClient {
     Flux<JsonNode> listBeerJsonNode();
 
     Flux<BeerDto> listBeerDtos();
+
+    Mono<BeerDto> getBeerById(String id);
 }
