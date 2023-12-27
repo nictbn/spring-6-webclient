@@ -2,7 +2,6 @@ package com.example.spring6webclient.client;
 
 import com.example.spring6webclient.model.BeerDto;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -23,4 +22,8 @@ public interface BeerClient {
     Mono<BeerDto> createBeer(BeerDto newDto);
 
     Mono<BeerDto> updateBeer(BeerDto dto);
+
+    Mono<BeerDto> patchBeer(BeerDto dto);
+
+    Mono<Void> deleteBeer(BeerDto dto);
 }
