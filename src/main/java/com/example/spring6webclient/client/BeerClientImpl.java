@@ -18,6 +18,7 @@ public class BeerClientImpl implements BeerClient {
     public BeerClientImpl(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder.build();
     }
+
     @Override
     public Flux<String> listBeer() {
         return webClient.get().uri(BEER_PATH).retrieve().bodyToFlux(String.class);
@@ -43,5 +44,14 @@ public class BeerClientImpl implements BeerClient {
         return webClient.get().uri(uriBuilder -> uriBuilder.path(BEER_PATH_ID).build(id))
                 .retrieve()
                 .bodyToMono(BeerDto.class);
+    }
+
+    @Override
+    public Flux<BeerDto> getBeerByBeerStyle(String beerStyle) {
+        return webClient.get().uri(uriBuilder -> uriBuilder
+                        .path(BEER_PATH)
+                        .queryParam("beerStyle", beerStyle).build())
+                .retrieve()
+                .bodyToFlux(BeerDto.class);
     }
 }
