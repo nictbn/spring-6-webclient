@@ -1,5 +1,6 @@
 package com.example.spring6webclient.client;
 
+import com.example.spring6webclient.model.BeerDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -17,16 +18,21 @@ public class BeerClientImpl implements BeerClient {
     }
     @Override
     public Flux<String> listBeer() {
-        return webClient.get().uri(BEER_PATH, String.class).retrieve().bodyToFlux(String.class);
+        return webClient.get().uri(BEER_PATH).retrieve().bodyToFlux(String.class);
     }
 
     @Override
     public Flux<Map> listBeerMap() {
-        return webClient.get().uri(BEER_PATH, Map.class).retrieve().bodyToFlux(Map.class);
+        return webClient.get().uri(BEER_PATH).retrieve().bodyToFlux(Map.class);
     }
 
     @Override
     public Flux<JsonNode> listBeerJsonNode() {
-        return webClient.get().uri(BEER_PATH, JsonNode.class).retrieve().bodyToFlux(JsonNode.class);
+        return webClient.get().uri(BEER_PATH).retrieve().bodyToFlux(JsonNode.class);
+    }
+
+    @Override
+    public Flux<BeerDto> listBeerDtos() {
+        return webClient.get().uri(BEER_PATH).retrieve().bodyToFlux(BeerDto.class);
     }
 }
